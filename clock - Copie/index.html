@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Clock</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            background-image: url('logo1.jpg');
+            background-repeat: no-repeat;
+            background-size: 550px 650px;
+        }
+        #clock{
+            width: 400px;
+            height: 400px;
+            border: 5px solid black;
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0px 0px 10px 5px white;
+            background-color: white;
+            margin: 15% 5.5% ;/*30%*/
+        }
+        .clock-num{
+            position: absolute;
+            width: 28px;
+            height: 50%;
+            top: 0px;
+            right: calc(50% - 10px);
+            transform-origin: bottom center;
+            
+        }
+        .clock-num span{
+            position: absolute;/*retation des num*/
+            text-align: center;
+            width: 28px;
+            height: 28px;
+            margin: 5px 0;
+            border: 1px solid rgba(0, 0, 0, 0.87);
+            border-radius: 50%;
+            box-shadow:inset 2px 2px 20px white;
+            background-color: black;
+            font-style: italic;
+            color: black;
+            font-size: 22px;
+            z-index: 10;
+        }
+        #s1{
+            position: absolute;
+            width: 250px;
+            height: 100%;
+            top: 10px;
+            right: calc(50% - 120px);
+            font-size: 160px;
+            z-index: 0;
+            text-align: center;
+            text-shadow: 3px 3px 8px rgb(68, 29, 29);
+        }
+        #s-hour{
+            position: absolute;
+            width: 2px;
+            height: 40%;
+            top: 10%;
+            right: calc(50% - 1px);
+            transform-origin: bottom center;
+            z-index: 50;
+            background: red;
+            box-shadow: 3px 6px 6px rgb(0, 0, 0);
+            border: none;
+            border-radius: 30%;
+        }
+        #s-hour:before{
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 35px;
+            bottom: -35px;
+            background: red;
+            box-shadow: 3px 6px 6px rgb(0, 0, 0);
+            border: none;
+            border-radius: 30%;
+            z-index: 50;
+        }
+        #m-hour{
+            position: absolute;
+            width: 4px;
+            height: 33%;
+            background: green;
+            top: 17%;
+            right: calc(50% - 2px);
+            transform-origin: bottom center;
+            z-index: 40;
+            box-shadow: 3px 4px 6px rgb(0, 0, 0);
+            border: none;
+            border-radius: 25%;
+        }
+        #m-hour:before{
+            content: "";
+            position: absolute;
+            width: 4px;
+            height: 25px;
+            bottom: -25px;
+            background: green;
+            box-shadow: 3px 4px 6px rgb(0, 0, 0);
+            border: none;
+            border-radius: 25%;
+            z-index: 40;
+        }
+        #h-hour{
+            position: absolute;
+            width: 6px;
+            height: 25%;
+            background: blue;
+            top: 25%;
+            right: calc(50% - 3px);
+            transform-origin: bottom center;
+            z-index: 30;
+            box-shadow: 3px 2px 6px rgb(0, 0, 0);
+            border: none;
+            border-radius: 20%;
+        }
+        #h-hour:before{
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 15px;
+            bottom: -15px;
+            background: blue;
+            box-shadow: 3px 2px 6px rgb(0, 0, 0);
+            border: none;
+            border-radius: 20%;
+            z-index: 30;
+        }
+        #clock-center{
+            position: absolute;
+            z-index: 40;
+            width: 10px;
+            height: 10px;
+            border-radius:50%;
+            top: calc(50% - 5px);
+            right: calc(50% - 5px);
+            background: #000;
+        }
+    </style>
+    <script>
+        function retit_num()
+        {
+            var clock_num = document.getElementsByClassName('clock-num');
+            var num = document.querySelectorAll(".clock-num span");
+            rota_num_deg = 30;//360deg / 12num = 30deg
+            for (var i = 0; i < 12; i++) {
+                clock_num[i].style.transform = 'rotate(' + rota_num_deg + 'deg)';
+                num[i].style.transform = 'rotate(-' + rota_num_deg + 'deg)';
+                rota_num_deg +=30;
+            }
+        }
+        function clock()
+        {
+            var s_hr = document.getElementById('s-hour');
+            var m_hr = document.getElementById('m-hour');
+            var h_hr = document.getElementById('h-hour');
+            var date = new Date();
+            var s = date.getSeconds();
+            var m = date.getMinutes();
+            var h = date.getHours();
+            s_hr.style.transform = 'rotate(' + s * 6 +'deg)';/*360deg/60s=6*/
+            m_hr.style.transform = 'rotate(' + (m * 6 + s/10) +'deg)';/*360deg/60m=6  */
+            h_hr.style.transform = 'rotate(' + (h * 30 + m/2) +'deg)';/*360deg/12h=30  */
+            setTimeout(clock,500);
+        }
+        
+    </script>
+</head>
+<body onload="retit_num();clock();">
+        <div id="clock">
+            <span id="s1"> الله اكبر</span>
+             <div class="clock-num" id="num-1"> <span>1</span> </div>
+             <div class="clock-num" id="num-2"> <span>2</span> </div>
+             <div class="clock-num" id="num-3"> <span>3</span> </div>
+             <div class="clock-num" id="num-4"> <span>4</span> </div>
+             <div class="clock-num" id="num-5"> <span>5</span> </div>
+             <div class="clock-num" id="num-6"> <span>6</span> </div>
+             <div class="clock-num" id="num-7"> <span>7</span> </div>
+             <div class="clock-num" id="num-8"> <span>8</span> </div>
+             <div class="clock-num" id="num-9"> <span>9</span> </div>
+             <div class="clock-num" id="num-10"> <span>10</span> </div>
+             <div class="clock-num" id="num-11"> <span>11</span> </div>
+             <div class="clock-num" id="num-12"> <span>12</span> </div>
+     
+             <div id="s-hour"></div>
+             <div id="m-hour"></div>
+             <div id="h-hour"></div>
+             <div id="clock-center"></div>
+        </div>
+</body>
+</html>
